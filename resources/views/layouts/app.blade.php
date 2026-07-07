@@ -5,23 +5,52 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
 
-    <title>DataFlow</title>
+    <title>{{ $title ?? config('app.name') }}</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    {{-- CSS --}}
+    <link rel="shortcut icon"
+          href="{{ asset('assets/images/logos/favicon.png') }}">
+
+    <link rel="stylesheet"
+          href="{{ asset('assets/css/styles.min.css') }}">
 
     @livewireStyles
 
 </head>
 
-<body class="bg-light">
+<body>
 
-    {{ $slot }}
+<div class="page-wrapper"
+     id="main-wrapper">
 
-    @livewireScripts
+    {{-- Sidebar --}}
+    @include('components.sidebar')
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="body-wrapper">
+
+        {{-- Navbar --}}
+        @include('components.navbar')
+
+        <div class="body-wrapper-inner">
+
+            <div class="container-fluid">
+
+                {{ $slot }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@include('components.footer')
+
+@livewireScripts
 
 </body>
 
