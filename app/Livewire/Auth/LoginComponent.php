@@ -2,46 +2,35 @@
 
 namespace App\Livewire\Auth;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class LoginComponent extends Component
 {
-    public $email = '';
+    public string $email = '';
 
-    public $password = '';
+    public string $password = '';
 
     public function login()
     {
-        $this->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+        $validated = $this->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
-        $user = User::where('email', $this->email)->first();
+        if (!Auth::attempt($validated)) {
 
-        if (!$user) {
-
-            session()->flash('error', 'Email tidak ditemukan.');
+            session()->flash(
+                'error',
+                'Email atau password salah.'
+            );
 
             return;
         }
 
-        if (!Hash::check($this->password, $user->password)) {
+        session()->regenerate();
 
-            session()->flash('error', 'Password salah.');
-
-            return;
-        }
-
-        session([
-            'iduser' => $user->iduser,
-            'name' => $user->name,
-            'email' => $user->email
-        ]);
-
-        return redirect('/dashboard');
+        return $this->redirectRoute('dashboard', navigate: true);
     }
 
     public function render()
