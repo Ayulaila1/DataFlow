@@ -2,100 +2,29 @@
 
     <div class="container-fluid">
 
-        {{-- HEADER --}}
-        <div class="card bg-primary text-white mb-4">
+        {{-- ================= HEADER ================= --}}
+        <div class="card border-0 shadow-sm mb-4 overflow-hidden"
+            style="background:linear-gradient(135deg,#00529C,#0d6efd); border-radius:18px;">
 
-            <div class="card-body">
+            <div class="card-body p-4 text-white">
 
-                <h3>
+                <div class="row align-items-center">
 
-                    Selamat Datang,
-                    {{ auth()->user()->name }}
+                    <div class="col-md-8">
 
-                </h3>
+                        <h2 class="fw-bold mb-2">
+                            Selamat Datang, {{ auth()->user()->name }}
+                        </h2>
 
-                <p class="mb-0">
-
-                    Sistem DataFlow
-
-                </p>
-
-            </div>
-
-        </div>
-
-        {{-- CARD --}}
-        <div class="row">
-
-            <div class="col-md-3">
-
-                <div class="card">
-
-                    <div class="card-body">
-
-                        <h6>Total Upload</h6>
-
-                        <h2>{{ $totalUpload }}</h2>
+                        <p class="mb-0 opacity-75">
+                            DataFlow - Enterprise Excel Processing System
+                        </p>
 
                     </div>
 
-                </div>
+                    <div class="col-md-4 text-end d-none d-md-block">
 
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="card">
-
-                    <div class="card-body">
-
-                        <h6>Berhasil</h6>
-
-                        <h2 class="text-success">
-
-                            {{ $successUpload }}
-
-                        </h2>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="card">
-
-                    <div class="card-body">
-
-                        <h6>Gagal</h6>
-
-                        <h2 class="text-danger">
-
-                            {{ $failedUpload }}
-
-                        </h2>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="card">
-
-                    <div class="card-body">
-
-                        <h6>Upload Hari Ini</h6>
-
-                        <h2 class="text-primary">
-
-                            {{ $todayUpload }}
-
-                        </h2>
+                        <i class="ti ti-database fs-1"></i>
 
                     </div>
 
@@ -105,141 +34,522 @@
 
         </div>
 
-        {{-- TABEL --}}
-        <div class="card mt-4">
+        {{-- ================= STATISTIK ================= --}}
 
-            <div class="card-header">
+        <div class="row g-4">
 
-                <h5>
+            <div class="col-xl-3 col-md-6">
 
-                    Upload Terbaru
+                <div class="card border-0 shadow-sm stat-card">
 
-                </h5>
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+
+                                <small class="text-muted">
+                                    Total Upload
+                                </small>
+
+                                <h2 class="fw-bold mt-2">
+                                    {{ $totalUpload }}
+                                </h2>
+
+                            </div>
+
+                            <div class="icon-circle bg-primary">
+
+                                <i class="ti ti-upload text-white fs-4"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="card border-0 shadow-sm stat-card">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+
+                                <small class="text-muted">
+                                    Berhasil
+                                </small>
+
+                                <h2 class="fw-bold text-success mt-2">
+                                    {{ $successUpload }}
+                                </h2>
+
+                            </div>
+
+                            <div class="icon-circle bg-success">
+
+                                <i class="ti ti-circle-check text-white fs-4"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="card border-0 shadow-sm stat-card">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+
+                                <small class="text-muted">
+                                    Gagal
+                                </small>
+
+                                <h2 class="fw-bold text-danger mt-2">
+                                    {{ $failedUpload }}
+                                </h2>
+
+                            </div>
+
+                            <div class="icon-circle bg-danger">
+
+                                <i class="ti ti-alert-circle text-white fs-4"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+
+                <div class="card border-0 shadow-sm stat-card">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+
+                                <small class="text-muted">
+                                    Upload Hari Ini
+                                </small>
+
+                                <h2 class="fw-bold text-primary mt-2">
+                                    {{ $todayUpload }}
+                                </h2>
+
+                            </div>
+
+                            <div class="icon-circle bg-info">
+
+                                <i class="ti ti-calendar text-white fs-4"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {{-- ================= UPLOAD ================= --}}
+
+        <div class="card border-0 shadow-sm mt-4">
+
+            <div class="card-header bg-white border-0 pt-4">
+
+                <h4 class="fw-bold mb-1">
+
+                    Upload File Excel
+
+                </h4>
+
+                <small class="text-muted">
+
+                    Upload file Excel (.xlsx / .xls) untuk diproses oleh sistem.
+
+                </small>
 
             </div>
 
             <div class="card-body">
 
-                <div class="table-responsive">
+                @if(session()->has('success'))
 
-                    <table class="table table-bordered">
+                <div class="alert alert-success">
 
-                        <thead>
+                    {{ session('success') }}
 
-                            <tr>
+                </div>
 
-                                <th>No</th>
+                @endif
 
-                                <th>Nama File</th>
+                @error('file')
 
-                                <th>Total Data</th>
+                <div class="alert alert-danger">
 
-                                <th>Status</th>
+                    {{ $message }}
 
-                                <th>Tanggal</th>
+                </div>
 
-                            </tr>
+                @enderror
 
-                        </thead>
+                <form wire:submit.prevent="upload">
 
-                        <tbody>
+                    <div class="upload-area">
 
-                            @forelse($uploads as $item)
+                        <i class="ti ti-file-spreadsheet upload-icon"></i>
 
-                            <tr>
+                        <h5 class="fw-bold mt-3">
 
-                                <td>
+                            Pilih File Excel
 
-                                    {{ $loop->iteration }}
+                        </h5>
 
-                                </td>
+                        <p class="text-muted">
 
-                                <td>
+                            Format yang didukung :
+                            <strong>.xlsx</strong> &
+                            <strong>.xls</strong>
+
+                        </p>
+
+                        <input type="file" wire:model="file" class="form-control mt-3">
+
+                    </div>
+
+                    <div class="text-end mt-4">
+
+                        <button class="btn btn-primary px-5">
+
+                            <i class="ti ti-upload me-2"></i>
+
+                            Upload & Process
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        {{-- ================= PREVIEW FILE ================= --}}
+
+        <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
+
+            <div>
+
+                <h4 class="fw-bold mb-1">
+                    File Terbaru
+                </h4>
+
+                <small class="text-muted">
+                    Daftar file yang telah diupload.
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="row g-4">
+
+            @forelse($uploads as $item)
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card border-0 shadow-sm upload-card h-100">
+
+                    <div class="card-body">
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="excel-icon">
+
+                                <i class="ti ti-file-spreadsheet"></i>
+
+                            </div>
+
+                            <div class="ms-3 flex-grow-1">
+
+                                <h5 class="fw-bold mb-1 text-truncate">
 
                                     {{ $item->nama_asli }}
 
-                                </td>
+                                </h5>
 
-                                <td>
-
-                                    {{ $item->total_data }}
-
-                                </td>
-
-                                <td>
-
-                                    @if($item->status=="Processed")
-
-                                    <span class="badge bg-success">
-
-                                        Berhasil
-
-                                    </span>
-
-                                    @elseif($item->status=="Failed")
-
-                                    <span class="badge bg-danger">
-
-                                        Gagal
-
-                                    </span>
-
-                                    @else
-
-                                    <span class="badge bg-warning">
-
-                                        Uploaded
-
-                                    </span>
-
-                                    @endif
-
-                                </td>
-
-                                <td>
+                                <small class="text-muted">
 
                                     {{ date('d M Y H:i',strtotime($item->created_at)) }}
 
-                                </td>
+                                </small>
 
-                            </tr>
+                            </div>
 
-                            @empty
+                        </div>
 
-                            <tr>
+                        <hr>
 
-                                <td colspan="5" class="text-center">
+                        <div class="row text-center">
 
-                                    Belum ada upload.
+                            <div class="col-6">
 
-                                </td>
+                                <small class="text-muted">
 
-                            </tr>
+                                    Total Data
 
-                            @endforelse
+                                </small>
 
-                        </tbody>
+                                <h5 class="fw-bold">
 
-                    </table>
+                                    {{ $item->total_data }}
+
+                                </h5>
+
+                            </div>
+
+                            <div class="col-6">
+
+                                <small class="text-muted">
+
+                                    Status
+
+                                </small>
+
+                                <br>
+
+                                @if($item->status=="Processed")
+
+                                <span class="badge bg-success px-3 py-2">
+
+                                    Processed
+
+                                </span>
+
+                                @elseif($item->status=="Failed")
+
+                                <span class="badge bg-danger px-3 py-2">
+
+                                    Failed
+
+                                </span>
+
+                                @else
+
+                                <span class="badge bg-warning text-dark px-3 py-2">
+
+                                    Uploaded
+
+                                </span>
+
+                                @endif
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="d-grid gap-2">
+
+                            <button class="btn btn-outline-primary">
+
+                                <i class="ti ti-eye me-2"></i>
+
+                                Detail
+
+                            </button>
+
+                            <button class="btn btn-success">
+
+                                <i class="ti ti-download me-2"></i>
+
+                                Download
+
+                            </button>
+
+                            <button wire:click="delete({{ $item->idupload }})"
+                                wire:confirm="Yakin ingin menghapus file ini?" class="btn btn-outline-danger">
+
+                                <i class="ti ti-trash me-2"></i>
+
+                                Delete
+
+                            </button>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
             </div>
 
+            @empty
+
+            <div class="col-lg-12">
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body text-center py-5">
+
+                        <i class="ti ti-file-search text-primary" style="font-size:70px;"></i>
+
+                        <h4 class="mt-3">
+
+                            Belum Ada File
+
+                        </h4>
+
+                        <p class="text-muted">
+
+                            Upload file Excel pertama untuk mulai memproses data.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            @endforelse
+
+            <style>
+                .stat-card {
+                    transition: .3s;
+                    border-radius: 18px;
+                }
+
+                .stat-card:hover {
+                    transform: translateY(-5px);
+                }
+
+                .icon-circle {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .upload-area {
+
+                    border: 2px dashed #0d6efd;
+
+                    border-radius: 18px;
+
+                    padding: 50px;
+
+                    text-align: center;
+
+                    background: #f8fbff;
+
+                    transition: .3s;
+
+                }
+
+                .upload-area:hover {
+
+                    background: #eef6ff;
+
+                }
+
+                .upload-icon {
+
+                    font-size: 70px;
+
+                    color: #0d6efd;
+
+                }
+
+                .card {
+
+                    border-radius: 18px;
+
+                }
+
+                .upload-card {
+
+                    border-radius: 20px;
+
+                    transition: .35s;
+
+                    overflow: hidden;
+
+                }
+
+                .upload-card:hover {
+
+                    transform: translateY(-8px);
+
+                    box-shadow: 0 15px 35px rgba(0, 82, 156, .18) !important;
+
+                }
+
+                .excel-icon {
+
+                    width: 65px;
+
+                    height: 65px;
+
+                    border-radius: 18px;
+
+                    background: #e8f1ff;
+
+                    display: flex;
+
+                    align-items: center;
+
+                    justify-content: center;
+
+                    color: #00529C;
+
+                    font-size: 30px;
+
+                }
+
+                .btn {
+
+                    border-radius: 12px;
+
+                }
+
+                .badge {
+
+                    border-radius: 30px;
+
+                }
+            </style>
+
         </div>
-
-        {{-- BUTTON --}}
-        <form wire:submit.prevent="upload">
-
-            <input type="file" wire:model="file" class="form-control">
-
-            <button class="btn btn-primary mt-3">
-
-                Upload
-
-            </button>
-
-        </form>
 
     </div>
 
