@@ -5,17 +5,14 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ $title ?? config('app.name') }}</title>
 
     {{-- CSS --}}
-    <link rel="shortcut icon"
-          href="{{ asset('assets/images/logos/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logos/favicon.png') }}">
 
-    <link rel="stylesheet"
-          href="{{ asset('assets/css/styles.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
 
     @livewireStyles
 
@@ -23,22 +20,23 @@
 
 <body>
 
-<div class="page-wrapper"
-     id="main-wrapper">
+    <div class="page-wrapper" id="main-wrapper">
 
-    {{-- Sidebar --}}
-    @include('components.sidebar')
+        {{-- Sidebar --}}
+        @include('layouts.sidebar')
 
-    <div class="body-wrapper">
+        <div class="body-wrapper">
 
-        {{-- Navbar --}}
-        @include('components.navbar')
+            {{-- Navbar --}}
+            @include('layouts.navbar')
 
-        <div class="body-wrapper-inner">
+            <div class="body-wrapper-inner">
 
-            <div class="container-fluid">
+                <div class="container-fluid">
 
-                {{ $slot }}
+                    {{ $slot }}
+
+                </div>
 
             </div>
 
@@ -46,11 +44,9 @@
 
     </div>
 
-</div>
+    {{-- @include('layouts.footer') --}}
 
-@include('components.footer')
-
-@livewireScripts
+    @livewireScripts
 
 </body>
 
