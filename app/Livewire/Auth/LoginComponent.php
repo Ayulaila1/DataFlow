@@ -47,6 +47,6 @@ class LoginComponent extends Component
     public function render()
     {
         return view('livewire.auth.login-component')
-            ->layout('layouts.app');
+            ->layout('layouts.guest');
     }
 }
