@@ -25,7 +25,7 @@
         <!-- ---------------------------------- -->
         <!-- Dashboard -->
         <!-- ---------------------------------- -->
-        <li class="sidebar-item">
+        {{-- <li class="sidebar-item">
           <a class="sidebar-link justify-content-between" href="{{ route('data-flow') }}" aria-expanded="false">
 
             <span class="d-flex">
@@ -34,7 +34,7 @@
             <span class="hide-menu">Data Flow</span>
 
           </a>
-        </li>
+        </li> --}}
       </ul>
     </nav>
     <!-- End Sidebar navigation -->

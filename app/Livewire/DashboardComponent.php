@@ -2,11 +2,16 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\DataFlowImport;
 
 class DashboardComponent extends Component
 {
+    use WithFileUploads;
+
     public $totalUpload = 0;
 
     public $successUpload = 0;
@@ -14,7 +19,7 @@ class DashboardComponent extends Component
     public $failedUpload = 0;
 
     public $todayUpload = 0;
-
+    public $file;
     public $uploads = [];
 
     public function mount()
@@ -42,6 +47,21 @@ class DashboardComponent extends Component
             ->latest()
             ->take(5)
             ->get();
+    }
+
+    public function upload()
+    {
+        $this->validate([
+
+            'file' => 'required|mimes:xlsx,xls|max:10240'
+
+        ]);
+
+        $import = new DataFlowImport();
+
+        Excel::import($import, $this->file);
+
+        dd($import->rows);
     }
 
     public function render()

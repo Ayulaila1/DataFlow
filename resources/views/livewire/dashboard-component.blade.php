@@ -229,15 +229,17 @@
         </div>
 
         {{-- BUTTON --}}
-        <div class="text-end mt-3">
+        <form wire:submit.prevent="upload">
 
-            <a href="/upload" class="btn btn-primary">
+            <input type="file" wire:model="file" class="form-control">
 
-                Upload File
+            <button class="btn btn-primary mt-3">
 
-            </a>
+                Upload
 
-        </div>
+            </button>
+
+        </form>
 
     </div>
 
