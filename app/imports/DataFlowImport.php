@@ -2,15 +2,17 @@
 
 namespace App\Imports;
 
-use Maatwebsite\Excel\Concerns\ToCollection;
-use Illuminate\Support\Collection;
+use App\Imports\SheetImport;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class DataFlowImport implements ToCollection
+class DataFlowImport implements WithMultipleSheets
 {
-    public $rows = [];
+    public $sheets = [];
 
-    public function collection(Collection $collection)
+    public function sheets(): array
     {
-        $this->rows = $collection;
+        return [
+            new SheetImport($this)
+        ];
     }
 }

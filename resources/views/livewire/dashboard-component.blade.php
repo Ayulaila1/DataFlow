@@ -1,4 +1,4 @@
-<div class="body-wrapper-inner">
+<div class="body-wrapper-inner mt-4">
 
     <div class="container-fluid">
 
@@ -12,7 +12,7 @@
 
                     <div class="col-md-8">
 
-                        <h2 class="fw-bold mb-2">
+                        <h2 class="fw-bold mb-2" style="color: #f8fbff">
                             Selamat Datang, {{ auth()->user()->name }}
                         </h2>
 
@@ -218,33 +218,35 @@
 
                 @enderror
 
-                <form wire:submit.prevent="upload">
+                <form wire:submit.prevent="upload" enctype="multipart/form-data">
 
                     <div class="upload-area">
 
                         <i class="ti ti-file-spreadsheet upload-icon"></i>
 
                         <h5 class="fw-bold mt-3">
-
                             Pilih File Excel
-
                         </h5>
 
                         <p class="text-muted">
-
                             Format yang didukung :
                             <strong>.xlsx</strong> &
                             <strong>.xls</strong>
-
                         </p>
 
-                        <input type="file" wire:model="file" class="form-control mt-3">
+                        <input type="file" wire:model.live="file" class="form-control">
+
+                        <hr>
+
+                        <pre>
+                        @json($file)
+                        </pre>
 
                     </div>
 
                     <div class="text-end mt-4">
 
-                        <button class="btn btn-primary px-5">
+                        <button type="submit" class="btn btn-primary px-5">
 
                             <i class="ti ti-upload me-2"></i>
 
@@ -442,6 +444,12 @@
             @endforelse
 
             <style>
+                .body-wrapper-inner {
+
+                    padding-top: 25px;
+
+                }
+
                 .stat-card {
                     transition: .3s;
                     border-radius: 18px;
