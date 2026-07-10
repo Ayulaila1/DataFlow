@@ -218,7 +218,7 @@
 
                 @enderror
 
-                <form wire:submit.prevent="upload" enctype="multipart/form-data">
+                <form wire:submit.prevent="processUpload" enctype="multipart/form-data">
 
                     <div class="upload-area">
 
@@ -234,13 +234,11 @@
                             <strong>.xls</strong>
                         </p>
 
-                        <input type="file" wire:model.live="file" class="form-control">
+                        <input type="file" wire:model="file" class="form-control mt-3">
 
-                        <hr>
-
-                        <pre>
-                        @json($file)
-                        </pre>
+                        <div wire:loading wire:target="file" class="text-primary mt-2">
+                            Uploading...
+                        </div>
 
                     </div>
 

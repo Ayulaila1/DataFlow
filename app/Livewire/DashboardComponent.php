@@ -35,6 +35,11 @@ class DashboardComponent extends Component
         $this->loadDashboard();
     }
 
+    // public function updatedFile()
+    // {
+    //     dd($this->file);
+    // }
+
     public function loadDashboard()
     {
         $this->totalUpload = Upload::count();
@@ -48,9 +53,9 @@ class DashboardComponent extends Component
         $this->uploads = Upload::latest()->take(5)->get();
     }
 
-    public function upload()
+    public function processUpload()
     {
-        dd('MASUK METHOD UPLOAD');
+        // dd('masuk');
         $this->validate([
             'file' => 'required|file|mimes:xlsx,xls|max:20480'
         ]);
@@ -74,6 +79,7 @@ class DashboardComponent extends Component
                 $filename,
                 'public'
             );
+            // dd($path);
 
             /*
             |--------------------------------------------------------------------------
@@ -83,7 +89,7 @@ class DashboardComponent extends Component
 
             $upload = Upload::create([
 
-                'user_iduser' => session('iduser'),
+                'user_iduser' => auth()->user()->iduser,
 
                 'nama_file' => pathinfo($originalName, PATHINFO_FILENAME),
 
@@ -98,6 +104,7 @@ class DashboardComponent extends Component
                 'generated_file' => null,
 
             ]);
+            // dd($upload);
 
             /*
             |--------------------------------------------------------------------------
@@ -105,8 +112,9 @@ class DashboardComponent extends Component
             |--------------------------------------------------------------------------
             */
 
-            $sheets = Excel::toArray([], storage_path('app/public/' . $path));
-
+            // $sheets = Excel::toArray([], storage_path('app/public/' . $path));
+            $sheets = Excel::toArray([], $this->file);
+            // dd($sheets);
             $jumlahData = 0;
 
             foreach ($sheets as $sheetIndex => $sheet) {
@@ -121,16 +129,13 @@ class DashboardComponent extends Component
 
                         'row_index' => $rowIndex + 1,
 
-                        'row_data' => $row,
-
-                        'status' => 'Valid',
-
-                        'notes' => null,
+                        'row_data' => json_encode($row),
 
                     ]);
 
                     $jumlahData++;
                 }
+
             }
 
             /*
@@ -142,9 +147,7 @@ class DashboardComponent extends Component
             $upload->update([
 
                 'total_data' => $jumlahData,
-
                 'status' => 'Processed'
-
             ]);
 
             DB::commit();
@@ -161,7 +164,7 @@ class DashboardComponent extends Component
         } catch (\Exception $e) {
 
             DB::rollBack();
-
+            // dd($e);
             session()->flash(
                 'error',
                 $e->getMessage()
