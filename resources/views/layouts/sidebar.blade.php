@@ -22,22 +22,15 @@
             <span class="hide-menu">Dashboard</span>
           </a>
         </li>
-        <!-- ---------------------------------- -->
-        <!-- Dashboard -->
-        <!-- ---------------------------------- -->
-        {{-- <li class="sidebar-item">
-          <a class="sidebar-link justify-content-between" href="{{ route('data-flow') }}" aria-expanded="false">
-
-            <span class="d-flex">
-              <i class="ti ti-aperture"></i>
-            </span>
-            <span class="hide-menu">Data Flow</span>
-
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ route('history.upload') }}">
+            <i class="ti ti-history"></i>
+            <span>Riwayat Upload</span>
           </a>
-        </li> --}}
+        </li>
+
       </ul>
+
     </nav>
-    <!-- End Sidebar navigation -->
   </div>
-  <!-- End Sidebar scroll-->
 </aside>

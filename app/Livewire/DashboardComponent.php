@@ -39,6 +39,11 @@ class DashboardComponent extends Component
         $this->loadDashboard();
     }
 
+    // public function updatedFile()
+    // {
+    //     dd($this->file);
+    // }
+
     public function loadDashboard()
     {
         $this->totalUpload = Upload::count();
@@ -52,11 +57,20 @@ class DashboardComponent extends Component
         $this->uploads = Upload::latest()->take(5)->get();
     }
 
+<<<<<<< HEAD
         public function upload()
             {
                 $this->validate([
                     'file' => 'required|mimes:xlsx,xls|max:20480',
                 ]);
+=======
+    public function processUpload()
+    {
+        // dd('masuk');
+        $this->validate([
+            'file' => 'required|file|mimes:xlsx,xls|max:20480'
+        ]);
+>>>>>>> 8a0851d1f96e2fde207f256aae9d18471c0665a9
 
         DB::beginTransaction();
 
@@ -77,6 +91,7 @@ class DashboardComponent extends Component
                 $filename,
                 'public'
             );
+            // dd($path);
 
             /*
             |--------------------------------------------------------------------------
@@ -86,7 +101,11 @@ class DashboardComponent extends Component
 
             $upload = Upload::create([
 
+<<<<<<< HEAD
                 'user_iduser' => auth()->id(),
+=======
+                'user_iduser' => auth()->user()->iduser,
+>>>>>>> 8a0851d1f96e2fde207f256aae9d18471c0665a9
 
                 'nama_file' => pathinfo($originalName, PATHINFO_FILENAME),
 
@@ -101,6 +120,7 @@ class DashboardComponent extends Component
                 'generated_file' => null,
 
             ]);
+            // dd($upload);
 
             /*
             |--------------------------------------------------------------------------
@@ -108,8 +128,9 @@ class DashboardComponent extends Component
             |--------------------------------------------------------------------------
             */
 
-            $sheets = Excel::toArray([], storage_path('app/public/' . $path));
-
+            // $sheets = Excel::toArray([], storage_path('app/public/' . $path));
+            $sheets = Excel::toArray([], $this->file);
+            // dd($sheets);
             $jumlahData = 0;
 
             foreach ($sheets as $sheetIndex => $sheet) {
@@ -124,16 +145,13 @@ class DashboardComponent extends Component
 
                         'row_index' => $rowIndex + 1,
 
-                        'row_data' => $row,
-
-                        'status' => 'Valid',
-
-                        'notes' => null,
+                        'row_data' => json_encode($row),
 
                     ]);
 
                     $jumlahData++;
                 }
+
             }
 
             /*
@@ -145,9 +163,7 @@ class DashboardComponent extends Component
             $upload->update([
 
                 'total_data' => $jumlahData,
-
                 'status' => 'Processed'
-
             ]);
 
             DB::commit();
@@ -164,7 +180,7 @@ class DashboardComponent extends Component
         } catch (\Exception $e) {
 
             DB::rollBack();
-
+            // dd($e);
             session()->flash(
                 'error',
                 $e->getMessage()

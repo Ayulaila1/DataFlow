@@ -15,16 +15,9 @@ class UploadDetail extends Model
     protected $fillable = [
 
         'upload_idupload',
-
         'sheet_name',
-
         'row_index',
-
-        'row_data',
-
-        'status',
-
-        'notes'
+        'row_data'
 
     ];
 
