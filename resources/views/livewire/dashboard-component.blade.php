@@ -234,7 +234,14 @@
                             <strong>.xls</strong>
                         </p>
 
-                        <input type="file" wire:model.live="file" class="form-control">
+                        <input type="file"
+                            wire:model="file"
+                            accept=".xlsx,.xls"
+                            class="form-control">
+
+                        <div wire:loading wire:target="file">
+                            Uploading...
+                        </div>
 
                         <hr>
 

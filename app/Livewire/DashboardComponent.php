@@ -30,6 +30,10 @@ class DashboardComponent extends Component
 
     public $file;
 
+    protected $rules = [
+    'file' => 'required|mimes:xlsx,xls|max:20480',
+];
+
     public function mount()
     {
         $this->loadDashboard();
@@ -48,12 +52,11 @@ class DashboardComponent extends Component
         $this->uploads = Upload::latest()->take(5)->get();
     }
 
-    public function upload()
-    {
-        dd('MASUK METHOD UPLOAD');
-        $this->validate([
-            'file' => 'required|file|mimes:xlsx,xls|max:20480'
-        ]);
+        public function upload()
+            {
+                $this->validate([
+                    'file' => 'required|mimes:xlsx,xls|max:20480',
+                ]);
 
         DB::beginTransaction();
 
@@ -83,7 +86,7 @@ class DashboardComponent extends Component
 
             $upload = Upload::create([
 
-                'user_iduser' => session('iduser'),
+                'user_iduser' => auth()->id(),
 
                 'nama_file' => pathinfo($originalName, PATHINFO_FILENAME),
 
@@ -168,6 +171,10 @@ class DashboardComponent extends Component
             );
         }
     }
+    public function updatedFile()
+    {
+        $this->validateOnly('file');
+    }   
 
     public function delete($id)
     {

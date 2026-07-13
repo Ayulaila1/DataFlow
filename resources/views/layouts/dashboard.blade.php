@@ -1,16 +1,61 @@
+{{-- HEADER --}}
 <div class="row mb-4">
-  <div class="col-12">
-    <div class="card bg-primary text-white">
-      <div class="card-body">
-        <h3 class="mb-1">
-          Selamat Datang, {{ auth()->user()->name }}
-        </h3>
-        <p class="mb-0">
-          DataFlow - Sistem Upload, Generate, dan Download File Excel
-        </p>
-      </div>
+
+    <div class="col-12">
+
+        <div class="card border-0 shadow-lg overflow-hidden"
+            style="background:linear-gradient(135deg,#0052D4,#2F80ED); border-radius:20px;">
+
+            <div class="card-body py-4 px-5">
+
+                <div class="row align-items-center">
+
+                    <div class="col-lg-8">
+
+                        <span class="badge bg-white text-primary px-3 py-2 mb-3">
+
+                            Enterprise Dashboard
+
+                        </span>
+
+                        <h2 class="text-white fw-bold mb-2">
+
+                            Selamat Datang,
+
+                            {{ auth()->user()->name }}
+
+                        </h2>
+
+                        <p class="text-white-50 mb-0 fs-5">
+
+                            Kelola upload, preview, edit, generate, dan download file Excel
+                            secara cepat dan aman.
+
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-4 text-end">
+
+                        <div class="bg-white bg-opacity-25 rounded-circle d-inline-flex
+                            align-items-center justify-content-center"
+                            style="width:90px;height:90px;">
+
+                            <i class="ti ti-file-spreadsheet text-white"
+                                style="font-size:42px"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
+
 </div>
 
 {{-- Statistik --}}
