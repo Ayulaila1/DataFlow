@@ -3,90 +3,136 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title ?? 'DataFlow' }}</title>
 
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}">
-
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
 
     @livewireStyles
 
     <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
         html,
-        body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
+        body{
+            width:100%;
+            min-height:100%;
+            overflow-x:hidden;
+            background:#f6f9fc;
         }
 
-        .page-wrapper {
-            min-height: 100vh;
+        #main-wrapper{
+            display:flex;
+            width:100%;
+            min-height:100vh;
         }
 
-        .body-wrapper {
-            min-height: 100vh;
-            background: #f6f9fc;
+        /* Sidebar */
+        .left-sidebar{
+            width:270px;
+            min-width:270px;
+            height:100vh;
+            position:fixed;
+            left:0;
+            top:0;
+            z-index:1000;
+            background:#fff;
+            border-right:1px solid #ececec;
         }
 
-        .container-fluid {
-            padding-top: 24px !important;
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-            padding-bottom: 24px !important;
+        /* Content */
+        .body-wrapper{
+            margin-left:270px !important;
+            width:calc(100% - 270px);
+            min-height:100vh;
+            background:#f6f9fc;
+
+            /* Hapus style bawaan template */
+            left:unset !important;
+            right:unset !important;
         }
 
-        .app-header {
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            background: #fff;
+        .page-wrapper{
+            width:100%;
+            min-height:100vh;
         }
 
-        .left-sidebar {
-            z-index: 1000;
+        .container-fluid{
+            padding:25px;
         }
+
+        .app-header{
+            position:sticky;
+            top:0;
+            z-index:999;
+            background:#fff;
+        }
+
+        /* Hilangkan margin bawaan Flexy */
+        @media (min-width:1200px){
+
+            .page-wrapper{
+                margin-left:0 !important;
+            }
+
+            .body-wrapper{
+                margin-left:270px !important;
+            }
+
+        }
+
+        @media (max-width:1199px){
+
+            .left-sidebar{
+                transform:translateX(-100%);
+            }
+
+            .body-wrapper{
+                margin-left:0 !important;
+                width:100%;
+            }
+
+        }
+
     </style>
 
 </head>
 
 <body>
 
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-        data-sidebar-position="fixed" data-header-position="fixed">
+<div id="main-wrapper">
 
-        {{-- Sidebar --}}
-        @include('layouts.sidebar')
+    {{-- Sidebar --}}
+    @include('layouts.sidebar')
 
-        <div class="body-wrapper">
+    <div class="body-wrapper">
 
-            {{-- Navbar --}}
-            @include('layouts.navbar')
+        {{-- Navbar --}}
+        @include('layouts.navbar')
 
-            <div class="container-fluid">
+        <div class="container-fluid">
 
-                {{ $slot }}
-
-            </div>
+            {{ $slot }}
 
         </div>
 
     </div>
 
-    <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
+</div>
 
-    <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/app.min.js') }}"></script>
+<script src="{{ asset('assets/js/sidebarmenu.js') }}"></script>
 
-    <script src="{{ asset('assets/js/app.min.js') }}"></script>
-
-    <script src="{{ asset('assets/js/sidebarmenu.js') }}"></script>
-
-    {{-- <script src="{{ asset('assets/js/custom.js') }}"></script> --}}
-
-    @livewireScripts
+@livewireScripts
 
 </body>
-
 </html>

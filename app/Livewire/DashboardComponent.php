@@ -57,20 +57,13 @@ class DashboardComponent extends Component
         $this->uploads = Upload::latest()->take(5)->get();
     }
 
-<<<<<<< HEAD
-        public function upload()
-            {
-                $this->validate([
-                    'file' => 'required|mimes:xlsx,xls|max:20480',
-                ]);
-=======
     public function processUpload()
     {
-        // dd('masuk');
+        //  dd('1. Masuk processUpload');
         $this->validate([
             'file' => 'required|file|mimes:xlsx,xls|max:20480'
         ]);
->>>>>>> 8a0851d1f96e2fde207f256aae9d18471c0665a9
+        // dd('2. Lolos validasi');
 
         DB::beginTransaction();
 
@@ -100,12 +93,9 @@ class DashboardComponent extends Component
             */
 
             $upload = Upload::create([
+                
 
-<<<<<<< HEAD
-                'user_iduser' => auth()->id(),
-=======
                 'user_iduser' => auth()->user()->iduser,
->>>>>>> 8a0851d1f96e2fde207f256aae9d18471c0665a9
 
                 'nama_file' => pathinfo($originalName, PATHINFO_FILENAME),
 
@@ -121,6 +111,7 @@ class DashboardComponent extends Component
 
             ]);
             // dd($upload);
+            $sheets = Excel::toArray([], $this->file);
 
             /*
             |--------------------------------------------------------------------------
@@ -180,7 +171,7 @@ class DashboardComponent extends Component
         } catch (\Exception $e) {
 
             DB::rollBack();
-            // dd($e);
+            dd($e);
             session()->flash(
                 'error',
                 $e->getMessage()

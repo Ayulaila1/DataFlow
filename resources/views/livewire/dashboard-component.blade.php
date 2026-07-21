@@ -1,6 +1,4 @@
-<div class="body-wrapper-inner mt-4">
-
-    <div class="container-fluid">
+<div class="dashboard-content mt-4">
 
         {{-- ================= HEADER ================= --}}
         <div class="card border-0 shadow-sm mb-4 overflow-hidden"
@@ -234,18 +232,7 @@
                             <strong>.xls</strong>
                         </p>
 
-<<<<<<< HEAD
-                        <input type="file"
-                            wire:model="file"
-                            accept=".xlsx,.xls"
-                            class="form-control">
-
-                        <div wire:loading wire:target="file">
-                            Uploading...
-                        </div>
-=======
                         <input type="file" wire:model="file" class="form-control mt-3">
->>>>>>> 8a0851d1f96e2fde207f256aae9d18471c0665a9
 
                         <div wire:loading wire:target="file" class="text-primary mt-2">
                             Uploading...
@@ -567,7 +554,5 @@
             </style>
 
         </div>
-
-    </div>
 
 </div>

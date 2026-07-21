@@ -70,4 +70,8 @@ class UploadHistoryComponent extends Component
             'uploads' => $uploads
         ])->layout('layouts.app');
     }
+    public function detail($id)
+{
+    return redirect()->route('history.detail', $id);
+}
 }
